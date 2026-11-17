@@ -13,6 +13,8 @@ python visualize_data.py
 
 The script saves `data_visualization_dashboard.png` beside the input CSV. It validates the required columns and excludes incomplete or duplicate quote-author records before plotting. The histogram avoids a smoothed density curve because the sample is small and the measurements are discrete.
 
+Streamlit Community Cloud installs the dependencies listed in the root `requirements.txt` during deployment.
+
 The notebook can also be run from this folder. In a notebook, the project paths are based on the kernel's current working directory because `__file__` is not defined there.
 
 ## Files
