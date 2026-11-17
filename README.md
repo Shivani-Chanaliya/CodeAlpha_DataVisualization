@@ -7,11 +7,11 @@ This project turns the quotes snapshot into a two-chart dashboard. The author ba
 From this folder:
 
 ```powershell
-python -m pip install pandas matplotlib seaborn
-python visualize_data.py
+python -m pip install -r requirements.txt
+streamlit run visualize_data.py
 ```
 
-The script saves `data_visualization_dashboard.png` beside the input CSV. It validates the required columns and excludes incomplete or duplicate quote-author records before plotting. The histogram avoids a smoothed density curve because the sample is small and the measurements are discrete.
+The dashboard displays the charts, summary metrics, and cleaned quote data. It also saves `data_visualization_dashboard.png` beside the input CSV. It validates the required columns and excludes incomplete or duplicate quote-author records before plotting. The histogram avoids a smoothed density curve because the sample is small and the measurements are discrete.
 
 Streamlit Community Cloud installs the dependencies listed in the root `requirements.txt` during deployment.
 

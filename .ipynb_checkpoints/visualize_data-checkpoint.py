@@ -3,6 +3,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
+import streamlit as st
 
 
 PROJECT_DIR = Path(__file__).parent
@@ -61,12 +62,26 @@ def make_dashboard(data, output_file=OUTPUT_FILE):
     figure.suptitle("A Snapshot of Quotes to Scrape", fontsize=16)
     figure.tight_layout()
     figure.savefig(output_file, dpi=250, bbox_inches="tight")
-    plt.close(figure)
+    return figure
 
 
 def main():
+    st.set_page_config(page_title="Quote Data Visualization", layout="wide")
+    st.title("Quote Data Visualization")
+    st.caption("Explore the scraped quote sample. Counts describe only this dataset.")
+
     data = load_quotes()
-    make_dashboard(data)
+    metrics = st.columns(3)
+    metrics[0].metric("Quotes", f"{len(data):,}")
+    metrics[1].metric("Unique authors", f"{data['author'].nunique():,}")
+    metrics[2].metric("Average quote length", f"{data['character_count'].mean():.1f} chars")
+
+    figure = make_dashboard(data)
+    st.pyplot(figure)
+    plt.close(figure)
+
+    st.subheader("Quote data")
+    st.dataframe(data[["author", "quote", "character_count"]], hide_index=True)
     print(f"Dashboard saved to {OUTPUT_FILE}")
     print(f"Visualized {len(data)} complete, unique quote records.")
     print("The charts describe this scraped sample; author counts are not popularity measures.")
