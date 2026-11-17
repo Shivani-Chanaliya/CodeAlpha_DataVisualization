@@ -6,6 +6,8 @@ import seaborn as sns
 
 
 PROJECT_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
+if not (PROJECT_DIR / "scraped_quotes.csv").is_file():
+    PROJECT_DIR = PROJECT_DIR.parent
 DATA_FILE = PROJECT_DIR / "scraped_quotes.csv"
 OUTPUT_FILE = PROJECT_DIR / "data_visualization_dashboard.png"
 
